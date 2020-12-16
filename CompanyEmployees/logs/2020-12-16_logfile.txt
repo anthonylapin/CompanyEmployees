@@ -1,0 +1,4 @@
+2020-12-16 12:09:01.6128 INFO Here is info message froom our values controller
+2020-12-16 12:09:01.6728 DEBUG Here is debug message froom our values controller
+2020-12-16 12:09:01.6839 WARN Here is warning message froom our values controller
+2020-12-16 12:09:01.6937 ERROR Here is error message froom our values controller
