@@ -1,0 +1,2 @@
+2020-12-20 23:20:23.0540 INFO Company with id: c9d4c053-49b6-410c-bc78-2d54a9991871 doesn't exist in the database
+2020-12-20 23:26:00.8335 INFO Company with id: 80abbca8-664d-4b20-b5de-024705497d4a doesn't exist in the database
