@@ -44,6 +44,7 @@ namespace CompanyEmployees
                 config.RespectBrowserAcceptHeader = true;
                 config.ReturnHttpNotAcceptable = true; // return 406 if format not supported
             })
+                .AddNewtonsoftJson()
                 .AddXmlDataContractSerializerFormatters()
                 .AddCustomCSVFormatter();
         }
