@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Entities.RequestFeatures;
+using Newtonsoft.Json;
 
 namespace CompanyEmployees.Controllers
 {
@@ -30,7 +32,8 @@ namespace CompanyEmployees.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetEmployeesForCompany(Guid companyId)
+        public async Task<IActionResult> GetEmployeesForCompany(Guid companyId,
+            [FromQuery]EmployeeParameters employeeParameters)
         {
             var company = await _repository.Company.GetCompanyAsync(companyId, trackChanges: false);
 
@@ -40,7 +43,12 @@ namespace CompanyEmployees.Controllers
                 return NotFound();
             }
 
-            var employeesFromDb = await _repository.Employee.GetEmployeesAsync(companyId, trackChanges: false);
+            var employeesFromDb = await _repository.Employee.GetEmployeesAsync(companyId,
+                employeeParameters, trackChanges: false);
+
+            Response.Headers.Add("X-Pagination",
+                JsonConvert.SerializeObject(employeesFromDb.MetaData));
+
             var employeesDto = _mapper.Map<IEnumerable<EmployeeDto>>(employeesFromDb);
 
             return Ok(employeesDto);
