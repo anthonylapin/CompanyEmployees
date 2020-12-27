@@ -1,0 +1,5 @@
+2020-12-27 11:45:16.9709 ERROR Invalid model state for the object. Controller: Companies, action: CreateCompany
+2020-12-27 11:46:04.6112 ERROR Invalid model state for the object. Controller: Companies, action: CreateCompany
+2020-12-27 11:46:32.3736 ERROR Invalid model state for the object. Controller: Companies, action: CreateCompany
+2020-12-27 11:47:23.1490 ERROR Invalid model state for the object. Controller: Companies, action: CreateCompany
+2020-12-27 11:47:46.8137 ERROR Invalid model state for the object. Controller: Companies, action: CreateCompany

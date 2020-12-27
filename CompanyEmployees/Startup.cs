@@ -1,4 +1,5 @@
 using AutoMapper;
+using CompanyEmployees.ActionFilters;
 using CompanyEmployees.Extensions;
 using Contracts;
 using Microsoft.AspNetCore.Builder;
@@ -42,6 +43,8 @@ namespace CompanyEmployees
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
+            services.AddScoped<ValidationFilterAttribute>();
+            services.AddScoped<ValidateCompanyExistsAttribute>();
 
             services.AddControllers(config => 
             {
