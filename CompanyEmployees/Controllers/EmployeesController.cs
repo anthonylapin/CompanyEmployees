@@ -12,6 +12,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Entities.RequestFeatures;
 using Newtonsoft.Json;
+using CompanyEmployees.Extensions;
+using CompanyEmployees.Utility;
 
 namespace CompanyEmployees.Controllers
 {
@@ -22,18 +24,19 @@ namespace CompanyEmployees.Controllers
         private readonly IRepositoryManager _repository;
         private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
-        private readonly IDataShaper<EmployeeDto> _dataShaper;
+        private readonly EmployeeLinks _employeeLinks;
 
         public EmployeesController(IRepositoryManager repository, ILoggerManager logger,
-            IMapper mapper, IDataShaper<EmployeeDto> dataShaper)
+            IMapper mapper, EmployeeLinks employeeLinks)
         {
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
-            _dataShaper = dataShaper;
+            _employeeLinks = employeeLinks;
         }
 
         [HttpGet]
+        [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public async Task<IActionResult> GetEmployeesForCompany(Guid companyId,
             [FromQuery]EmployeeParameters employeeParameters)
         {
@@ -58,7 +61,10 @@ namespace CompanyEmployees.Controllers
 
             var employeesDto = _mapper.Map<IEnumerable<EmployeeDto>>(employeesFromDb);
 
-            return Ok(_dataShaper.ShapeData(employeesDto, employeeParameters.Fields));
+            var links = _employeeLinks.TryGenerateLinks(employeesDto, 
+                employeeParameters.Fields, companyId, HttpContext);
+
+            return links.HasLinks ? Ok(links.LinkedEntities) : Ok(links.ShapedEntities);
         }
 
         [HttpGet("{id}", Name = "GetEmployeeForCompany")]
