@@ -52,11 +52,14 @@ namespace CompanyEmployees
             services.AddScoped<ValidateMediaTypeAttribute>();
             services.AddScoped<EmployeeLinks>();
             services.ConfigureVersioning();
+            services.ConfigureResponseCaching();
+            services.ConfigureHttpCacheHeaders();
 
             services.AddControllers(config => 
             {
                 config.RespectBrowserAcceptHeader = true;
                 config.ReturnHttpNotAcceptable = true; // return 406 if format not supported
+                config.CacheProfiles.Add("120SecondsDuration", new CacheProfile { Duration = 120 });
             })
                 .AddNewtonsoftJson()
                 .AddXmlDataContractSerializerFormatters()
@@ -87,6 +90,9 @@ namespace CompanyEmployees
             {
                 ForwardedHeaders = ForwardedHeaders.All
             });
+
+            app.UseResponseCaching();
+            app.UseHttpCacheHeaders();
 
             app.UseRouting();
 

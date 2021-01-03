@@ -1,0 +1,1 @@
+2021-01-03 18:43:07.9445 INFO Company with id: df30a960-3b5d-42fd-5929-08d8a8487f43 doesn't exist in the database.
