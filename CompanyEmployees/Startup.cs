@@ -20,6 +20,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Repository.DataShaping;
 using CompanyEmployees.Utility;
+using AspNetCoreRateLimit;
 
 namespace CompanyEmployees
 {
@@ -54,6 +55,9 @@ namespace CompanyEmployees
             services.ConfigureVersioning();
             services.ConfigureResponseCaching();
             services.ConfigureHttpCacheHeaders();
+            services.AddMemoryCache();
+            services.ConfigureRateLimitingOptions();
+            services.AddHttpContextAccessor();
 
             services.AddControllers(config => 
             {
@@ -93,6 +97,8 @@ namespace CompanyEmployees
 
             app.UseResponseCaching();
             app.UseHttpCacheHeaders();
+
+            app.UseIpRateLimiting();
 
             app.UseRouting();
 
