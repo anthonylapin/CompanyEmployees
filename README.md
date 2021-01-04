@@ -1,0 +1,22 @@
+# CompanyEmployees
+
+- ASP.NET Core 3 RESTful Web Api project
+- C#, MS Sql
+- Logging service
+- Repository pattern for entities
+- GET/POST/PUT/DELETE/PATCH/OPTIONS/HEAD Requests
+- JWT Authentication & Authorization
+- Global Error handler
+- Csv support 
+- Asynchronous code
+- Action filters
+- Paging
+- Filtering
+- Searching
+- Sorting
+- Data Shaping
+- HATEOAS support
+- Versioning API
+- Caching
+- Rate limiting
+- Documenting with swagger
