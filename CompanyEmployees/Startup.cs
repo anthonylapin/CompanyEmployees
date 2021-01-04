@@ -59,6 +59,8 @@ namespace CompanyEmployees
             services.ConfigureRateLimitingOptions();
             services.AddHttpContextAccessor();
 
+            services.ConfigureSwagger();
+
             services.AddAuthentication();
             services.ConfigureIdentity();
             services.ConfigureJWT(Configuration);
@@ -110,6 +112,13 @@ namespace CompanyEmployees
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(s =>
+            {
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "Company Employees API V1");
+                s.SwaggerEndpoint("/swagger/v2/swagger.json", "Company Employees API V2");
+            });
 
             app.UseEndpoints(endpoints =>
             {
